@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<!--
+============================================================================
+  R&R LAWN CARE AND CONSTRUCTION  —  one-file website
+============================================================================
+
+  HOW TO EDIT THIS SITE (no coding needed):
+  - Everything you'd normally change is marked with  EDIT:  comments.
+  - To change WORDS: find the text on the page and type over it.
+  - To change the PHONE / EMAIL / SERVICE AREA: search this file for
+    "555" and for "youremail" and replace every match.
+  - To add PHOTOS: see the "GALLERY" section comment near the bottom.
+  - To make the QUOTE FORM email you for real: see the "QUOTE FORM"
+    comment — there are two easy options explained there.
+
+  TIP: Save a backup copy before making big changes.
+============================================================================
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- EDIT: This is the browser-tab title and what shows up in Google. -->
+<title>R&amp;R Lawn Care and Construction | Mowing, Landscaping &amp; Building</title>
+
+<!-- EDIT: This one-line description shows under your link in Google search. -->
+<meta name="description" content="R&R Lawn Care and Construction — full-service lawn maintenance, landscaping, hardscapes, and construction. Free quotes. Call today." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+  /* ===================================================================
+     DESIGN TOKENS — change these to recolor the whole site at once.
+     =================================================================== */
+  :root {
+    --pine:      #1C3B2A;   /* deep brand green */
+    --pine-deep: #142A1E;   /* darker green */
+    --turf:      #2F5E40;   /* mid green */
+    --clay:      #C56A38;   /* construction / surveyor accent (orange) */
+    --clay-deep: #A8542A;
+    --paper:     #ECEAE3;   /* page background (site-plan paper) */
+    --panel:     #E4E1D7;   /* slightly darker panel */
+    --ink:       #1E241D;   /* main text */
+    --ink-soft:  #4A524551;
+    --line:      rgba(30,36,29,0.16);
+    --line-strong: rgba(30,36,29,0.30);
+    --white:     #F7F5EF;
+
+    --display: "Barlow Condensed", "Arial Narrow", sans-serif;
+    --body:    "Barlow", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    --mono:    "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+
+    --maxw: 1180px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { max-width: 100%; display: block; }
+
+  a { color: inherit; }
+
+  .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  /* Monospace surveyor-style labels (eyebrows) */
+  .label {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--clay-deep);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .label::before {
+    content: "";
+    width: 22px; height: 1px;
+    background: var(--clay);
+    display: inline-block;
+  }
+
+  h1, h2, h3 { font-family: var(--display); font-weight: 800; line-height: 0.98; text-transform: uppercase; margin: 0; letter-spacing: 0.01em; }
+
+  /* ===================================================================
+     GRADE LINE — the signature divider (a surveyor's grade line).
+     =================================================================== */
+  .gradeline {
+    height: 26px;
+    width: 100%;
+    position: relative;
+    background:
+      repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 28px);
+    border-top: 1px dashed var(--line-strong);
+    border-bottom: 1px solid var(--line);
+  }
+  .gradeline span {
+    position: absolute;
+    top: 50%;
+    left: 24px;
+    transform: translateY(-50%);
+    background: var(--paper);
+    padding: 0 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--ink);
+    opacity: 0.7;
+  }
+
+  /* ===================================================================
+     HEADER / NAV
+     =================================================================== */
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(236,234,227,0.88);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brand .mono-mark {
+    font-family: var(--display); font-weight: 800; font-size: 22px;
+    background: var(--pine); color: var(--white);
+    width: 44px; height: 44px; border-radius: 4px;
+    display: grid; place-items: center; letter-spacing: -0.02em;
+  }
+  .brand b { font-family: var(--display); font-weight: 800; font-size: 21px; letter-spacing: 0.02em; line-height: 1; display: block; }
+  .brand small { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; color: var(--clay-deep); text-transform: uppercase; }
+
+  .nav-links { display: flex; align-items: center; gap: 30px; }
+  .nav-links a { font-family: var(--display); font-weight: 600; font-size: 17px; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; color: var(--ink); }
+  .nav-links a:hover { color: var(--clay-deep); }
+
+  .btn {
+    font-family: var(--display); font-weight: 700; font-size: 16px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 13px 22px; border-radius: 4px; border: 0;
+    transition: transform .12s ease, background .2s ease;
+  }
+  .btn-primary { background: var(--clay); color: var(--white); }
+  .btn-primary:hover { background: var(--clay-deep); transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line-strong); }
+  .btn-ghost:hover { border-color: var(--pine); color: var(--pine); }
+  .btn-pine { background: var(--pine); color: var(--white); }
+  .btn-pine:hover { background: var(--pine-deep); transform: translateY(-1px); }
+
+  .nav-call { display: flex; align-items: center; gap: 14px; }
+
+  .menu-toggle { display: none; background: none; border: 1.5px solid var(--line-strong); border-radius: 4px; padding: 8px 10px; cursor: pointer; }
+  .menu-toggle span { display: block; width: 22px; height: 2px; background: var(--ink); margin: 4px 0; }
+
+  /* ===================================================================
+     HERO
+     =================================================================== */
+  .hero {
+    position: relative;
+    background: var(--pine);
+    color: var(--white);
+    overflow: hidden;
+  }
+  /* Topographic contour lines drawn in CSS/SVG — no photo needed. */
+  .hero .topo {
+    position: absolute; inset: 0; opacity: 0.22; pointer-events: none;
+  }
+  .hero-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 48px;
+    align-items: center;
+    padding: 84px 0 92px;
+  }
+  .hero .label { color: #E9B488; }
+  .hero .label::before { background: var(--clay); }
+
+  .hero h1 {
+    font-size: clamp(48px, 7vw, 96px);
+    margin: 18px 0 0;
+    color: var(--white);
+  }
+  .hero h1 em { font-style: normal; color: #8FC79A; }
+  .hero p.lead {
+    font-size: 20px; line-height: 1.5; max-width: 46ch;
+    margin: 22px 0 32px; color: #DDE6DC;
+  }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+
+  /* spec card in hero */
+  .spec {
+    background: rgba(247,245,239,0.06);
+    border: 1px solid rgba(247,245,239,0.18);
+    border-radius: 6px;
+    padding: 22px;
+    backdrop-filter: blur(2px);
+  }
+  .spec h3 { font-size: 15px; letter-spacing: 0.14em; color: #8FC79A; font-family: var(--mono); font-weight: 600; text-transform: uppercase; }
+  .spec ul { list-style: none; margin: 14px 0 0; padding: 0; }
+  .spec li {
+    display: flex; justify-content: space-between; gap: 16px;
+    font-family: var(--mono); font-size: 13px;
+    padding: 11px 0; border-top: 1px dashed rgba(247,245,239,0.18);
+    color: #DDE6DC;
+  }
+  .spec li:first-child { border-top: 0; }
+  .spec li b { color: var(--white); font-weight: 600; }
+
+  /* ===================================================================
+     SECTION SHELL
+     =================================================================== */
+  section { padding: 86px 0; }
+  .sec-head { max-width: 720px; margin-bottom: 48px; }
+  .sec-head h2 { font-size: clamp(34px, 5vw, 58px); margin-top: 16px; }
+  .sec-head p { color: #3c443a; margin: 16px 0 0; font-size: 19px; }
+
+  /* ===================================================================
+     SERVICES — two tracks: Lawn Care & Construction
+     =================================================================== */
+  .tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .track {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 34px 32px 30px;
+    position: relative;
+  }
+  .track::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+    border-radius: 8px 8px 0 0;
+  }
+  .track.lawn::before { background: var(--turf); }
+  .track.build::before { background: var(--clay); }
+  .track .track-tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--clay-deep); }
+  .track.lawn .track-tag { color: var(--turf); }
+  .track h3 { font-size: 32px; margin: 8px 0 6px; }
+  .track > p { margin: 0 0 18px; color: #3c443a; font-size: 16px; }
+  .track ul { list-style: none; margin: 0; padding: 0; }
+  .track li {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 12px 0; border-top: 1px solid var(--line); font-size: 16.5px;
+  }
+  .track li svg { flex: none; margin-top: 3px; }
+  .track li b { font-weight: 600; }
+  .track li span { display: block; color: #5b6358; font-size: 14.5px; line-height: 1.45; }
+
+  /* ===================================================================
+     GALLERY
+     =================================================================== */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .shot {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    /* Branded placeholder look until a real photo is added */
+    background:
+      linear-gradient(135deg, rgba(28,59,42,0.92), rgba(47,94,64,0.78)),
+      var(--panel);
+    display: grid; place-items: center; text-align: center;
+    color: var(--white);
+  }
+  .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .shot .ph { padding: 18px; }
+  .shot .ph svg { margin: 0 auto 10px; opacity: 0.85; }
+  .shot .ph .ph-title { font-family: var(--display); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-size: 18px; }
+  .shot .ph .ph-sub { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; opacity: 0.85; margin-top: 4px; }
+  .shot .cap {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(transparent, rgba(20,42,30,0.92));
+    color: var(--white); padding: 30px 14px 12px;
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em;
+    opacity: 0; transition: opacity .2s ease;
+  }
+  .shot:hover .cap { opacity: 1; }
+
+  /* ===================================================================
+     REVIEWS
+     =================================================================== */
+  .reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .review {
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 8px; padding: 28px 26px;
+    display: flex; flex-direction: column;
+  }
+  .stars { color: var(--clay); letter-spacing: 2px; font-size: 18px; margin-bottom: 12px; }
+  .review blockquote { margin: 0; font-size: 17px; line-height: 1.55; color: #2a3127; flex: 1; }
+  .review .who { margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line-strong); }
+  .review .who b { font-family: var(--display); font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; font-size: 18px; display: block; }
+  .review .who small { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; color: var(--clay-deep); text-transform: uppercase; }
+
+  /* ===================================================================
+     QUOTE FORM
+     =================================================================== */
+  .quote { background: var(--pine); color: var(--white); position: relative; overflow: hidden; }
+  .quote .topo { position: absolute; inset: 0; opacity: 0.16; pointer-events: none; }
+  .quote-inner { position: relative; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 52px; align-items: start; }
+  .quote .label { color: #E9B488; }
+  .quote .label::before { background: var(--clay); }
+  .quote h2 { font-size: clamp(34px, 5vw, 56px); color: var(--white); margin-top: 16px; }
+  .quote .lead { color: #DDE6DC; margin: 18px 0 26px; font-size: 18px; max-width: 42ch; }
+  .quote .contact-line { font-family: var(--mono); font-size: 14px; color: #DDE6DC; padding: 10px 0; border-top: 1px dashed rgba(247,245,239,0.2); display: flex; gap: 12px; }
+  .quote .contact-line:first-of-type { border-top: 0; }
+  .quote .contact-line b { color: var(--white); }
+
+  form.q { background: rgba(247,245,239,0.06); border: 1px solid rgba(247,245,239,0.18); border-radius: 8px; padding: 28px; }
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #B9D2BC; margin-bottom: 7px; }
+  .field input, .field select, .field textarea {
+    width: 100%; background: var(--white); color: var(--ink);
+    border: 1px solid rgba(247,245,239,0.25); border-radius: 5px;
+    padding: 12px 14px; font-family: var(--body); font-size: 16px;
+  }
+  .field textarea { resize: vertical; min-height: 110px; }
+  .field input:focus, .field select:focus, .field textarea:focus { outline: 3px solid var(--clay); outline-offset: 1px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  form.q .btn { width: 100%; justify-content: center; margin-top: 6px; font-size: 18px; padding: 15px; }
+  form.q .fineprint { font-family: var(--mono); font-size: 11px; color: #B9D2BC; margin: 14px 0 0; line-height: 1.5; letter-spacing: 0.04em; }
+
+  /* ===================================================================
+     FOOTER
+     =================================================================== */
+  footer { background: var(--pine-deep); color: #C9D4C7; padding: 60px 0 30px; }
+  .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; }
+  footer .brand b, footer .brand small { color: var(--white); }
+  footer .brand .mono-mark { background: var(--clay); }
+  footer h4 { font-family: var(--display); text-transform: uppercase; letter-spacing: 0.06em; font-size: 16px; color: var(--white); margin: 0 0 14px; }
+  footer a { color: #C9D4C7; text-decoration: none; }
+  footer a:hover { color: var(--white); }
+  footer ul { list-style: none; margin: 0; padding: 0; }
+  footer li { padding: 5px 0; font-size: 15px; }
+  footer .foot-mono { font-family: var(--mono); font-size: 13px; }
+  .foot-bottom { margin-top: 44px; padding-top: 20px; border-top: 1px solid rgba(247,245,239,0.12); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; color: #97A695; }
+
+  /* ===================================================================
+     SCROLL REVEAL (disabled if user prefers reduced motion)
+     =================================================================== */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ===================================================================
+     RESPONSIVE
+     =================================================================== */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 36px; padding: 60px 0 70px; }
+    .tracks, .reviews, .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .quote-inner { grid-template-columns: 1fr; gap: 34px; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .nav-links.open {
+      display: flex; flex-direction: column; gap: 0;
+      position: absolute; top: 72px; left: 0; right: 0;
+      background: var(--paper); border-bottom: 1px solid var(--line); padding: 8px 24px 16px;
+    }
+    .nav-links.open a { padding: 12px 0; border-top: 1px solid var(--line); }
+    .menu-toggle { display: block; }
+    .nav-call .btn-text { display: none; }
+  }
+  @media (max-width: 560px) {
+    .gallery-grid { grid-template-columns: 1fr; }
+    .foot-grid { grid-template-columns: 1fr; }
+    .row2 { grid-template-columns: 1fr; }
+    body { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =====================================================================
+     HEADER
+     EDIT: change the company name pieces and the phone number below.
+     ===================================================================== -->
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label="R&R Lawn Care and Construction home">
+      <span class="mono-mark">R&amp;R</span>
+      <span>
+        <b>R&amp;R Lawn Care</b>
+        <small>&amp; Construction</small>
+      </span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#services">Services</a>
+      <a href="#work">Our Work</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#quote">Get a Quote</a>
+    </nav>
+
+    <div class="nav-call">
+      <!-- EDIT: replace 5551234567 (in href) and the visible number with your real phone. -->
+      <a class="btn btn-pine" href="tel:5551234567">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span class="btn-text">(555) 123-4567</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<span id="top"></span>
+
+<!-- =====================================================================
+     HERO
+     ===================================================================== -->
+<section class="hero" style="padding:0;">
+  <!-- Topographic contour background (drawn, not a photo). Leave as-is or remove. -->
+  <svg class="topo" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g fill="none" stroke="#9FD3A9" stroke-width="1.1">
+      <path d="M-50 120 C 200 60, 400 180, 650 120 S 1100 40, 1300 140"/>
+      <path d="M-50 200 C 220 150, 420 260, 660 200 S 1120 130, 1300 220"/>
+      <path d="M-50 290 C 230 240, 440 350, 680 290 S 1130 220, 1300 310"/>
+      <path d="M-50 380 C 240 330, 450 440, 690 380 S 1140 310, 1300 400"/>
+      <path d="M-50 470 C 250 420, 470 520, 700 470 S 1150 400, 1300 490"/>
+      <path d="M-50 560 C 260 510, 480 600, 720 560 S 1160 500, 1300 580"/>
+    </g>
+  </svg>
+
+  <div class="wrap hero-inner">
+    <div>
+      <span class="label">Lawn care &middot; Landscaping &middot; Construction</span>
+      <!-- EDIT: your main headline. -->
+      <h1>We grade it,<br>grow it,<br>&amp; <em>build it.</em></h1>
+      <!-- EDIT: short pitch under the headline. -->
+      <p class="lead">From weekly mowing to full hardscapes and ground-up builds, R&amp;R handles your property start to finish — done right, on schedule, and backed by people who answer the phone.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#quote">Get a free quote</a>
+        <a class="btn btn-ghost" href="#work" style="color:var(--white);border-color:rgba(247,245,239,0.4);">See our work</a>
+      </div>
+    </div>
+
+    <!-- "Spec sheet" card — quick facts. EDIT the values on the right. -->
+    <aside class="spec">
+      <h3>Project Spec</h3>
+      <ul>
+        <li><span>Service area</span><b>Your county &amp; nearby</b></li>
+        <li><span>Free estimates</span><b>Yes</b></li>
+        <li><span>Licensed &amp; insured</span><b>Fully</b></li>
+        <li><span>Residential</span><b>✓</b></li>
+        <li><span>Commercial</span><b>✓</b></li>
+        <li><span>Years in business</span><b>Est. 20XX</b></li>
+      </ul>
+    </aside>
+  </div>
+</section>
+
+<div class="gradeline"><span>GRADE LINE 0'-0"</span></div>
+
+<!-- =====================================================================
+     SERVICES  — two tracks
+     EDIT: add/remove <li> items in each list to match what you offer.
+     ===================================================================== -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="label">What we do</span>
+      <h2>Two crews. One property handled.</h2>
+      <p>Most companies do one or the other. We run a lawn-care side and a construction side, so the same trusted team can maintain your grounds and build what you've been planning.</p>
+    </div>
+
+    <div class="tracks">
+      <!-- ---------- LAWN CARE TRACK ---------- -->
+      <div class="track lawn reveal">
+        <span class="track-tag">Division 01</span>
+        <h3>Lawn Care &amp; Landscaping</h3>
+        <p>Keep your property sharp all season with dependable, scheduled service.</p>
+        <ul>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2F5E40" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>
+            <div><b>Mowing &amp; trimming</b><span>Weekly or bi-weekly cuts, edging, and string trimming.</span></div>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2F5E40" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>
+            <div><b>Cleanups &amp; leaf removal</b><span>Spring and fall cleanups, hauling, and bed refresh.</span></div>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2F5E40" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>
+            <div><b>Mulch, beds &amp; planting</b><span>Mulch installs, shrubs, trees, and seasonal color.</span></div>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2F5E40" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>
+            <div><b>Sod, seeding &amp; grading</b><span>New lawns, repairs, and drainage-friendly grading.</span></div>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2F5E40" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>
+            <div><b>Snow removal</b><span>Driveways and lots cleared through the winter.</span></div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- ---------- CONSTRUCTION TRACK ---------- -->
+      <div class="track build reveal">
+        <span class="track-tag">Division 02</span>
+        <h3>Construction &amp; Hardscapes</h3>
+        <p>Built to last, permitted properly, and finished clean.</p>
+        <ul>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C56A38" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>
+            <div><b>Patios, walkways &amp; pavers</b><span>Paver, stone, and concrete hardscapes.</span></div>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C56A38" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>
+            <div><b>Retaining &amp; garden walls</b><span>Engineered walls for slopes and raised beds.</span></div>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C56A38" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>
+            <div><b>Decks &amp; fences</b><span>Custom decks, pergolas, and privacy fencing.</span></div>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C56A38" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>
+            <div><b>Concrete &amp; foundations</b><span>Driveways, slabs, footings, and flatwork.</span></div>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C56A38" stroke-width="2.4"><path d="M20 6 9 17l-5-5"/></svg>
+            <div><b>Grading &amp; excavation</b><span>Site prep, drainage, and small excavation.</span></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gradeline"><span>SECTION B &mdash; FIELD WORK</span></div>
+
+<!-- =====================================================================
+     GALLERY / OUR WORK
+     -------------------------------------------------------------------
+     EDIT — HOW TO ADD A REAL PHOTO:
+       1. Put your photo file next to this HTML file (e.g. patio.jpg).
+       2. Inside a .shot below, DELETE the <div class="ph">...</div> block
+          and add this line instead:
+              <img src="patio.jpg" alt="Brief description of the photo" />
+       3. Keep the <div class="cap">...</div> line to show a caption on hover.
+     You can add or remove .shot blocks to change how many photos show.
+     ===================================================================== -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="label">Recent jobs</span>
+      <h2>Proof in the ground.</h2>
+      <p>A look at lawns we keep sharp and projects we've built. Swap these placeholders for photos of your own work.</p>
+    </div>
+
+    <div class="gallery-grid">
+      <!-- PHOTO 1 -->
+      <figure class="shot reveal">
+        <div class="ph">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg>
+          <div class="ph-title">Add photo 1</div>
+          <div class="ph-sub">e.g. paver-patio.jpg</div>
+        </div>
+        <figcaption class="cap">Paver patio &amp; fire pit — Riverside</figcaption>
+      </figure>
+      <!-- PHOTO 2 -->
+      <figure class="shot reveal">
+        <div class="ph">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg>
+          <div class="ph-title">Add photo 2</div>
+          <div class="ph-sub">e.g. fresh-cut-lawn.jpg</div>
+        </div>
+        <figcaption class="cap">Weekly maintenance — Oak Street</figcaption>
+      </figure>
+      <!-- PHOTO 3 -->
+      <figure class="shot reveal">
+        <div class="ph">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg>
+          <div class="ph-title">Add photo 3</div>
+          <div class="ph-sub">e.g. retaining-wall.jpg</div>
+        </div>
+        <figcaption class="cap">Retaining wall &amp; regrade — Hilltop</figcaption>
+      </figure>
+      <!-- PHOTO 4 -->
+      <figure class="shot reveal">
+        <div class="ph">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg>
+          <div class="ph-title">Add photo 4</div>
+          <div class="ph-sub">e.g. new-deck.jpg</div>
+        </div>
+        <figcaption class="cap">Cedar deck build — Maple Court</figcaption>
+      </figure>
+      <!-- PHOTO 5 -->
+      <figure class="shot reveal">
+        <div class="ph">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg>
+          <div class="ph-title">Add photo 5</div>
+          <div class="ph-sub">e.g. walkway.jpg</div>
+        </div>
+        <figcaption class="cap">Stone walkway — Elm Avenue</figcaption>
+      </figure>
+      <!-- PHOTO 6 -->
+      <figure class="shot reveal">
+        <div class="ph">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg>
+          <div class="ph-title">Add photo 6</div>
+          <div class="ph-sub">e.g. spring-cleanup.jpg</div>
+        </div>
+        <figcaption class="cap">Full spring cleanup — Pine Ridge</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div class="gradeline"><span>SECTION C &mdash; CLIENT NOTES</span></div>
+
+<!-- =====================================================================
+     REVIEWS
+     EDIT: replace with real reviews. Keep names + town if you can.
+     ===================================================================== -->
+<section id="reviews">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="label">Word of mouth</span>
+      <h2>What neighbors say.</h2>
+      <p>Replace these examples with real reviews from Google, Facebook, or customers who've given you permission.</p>
+    </div>
+
+    <div class="reviews">
+      <div class="review reveal">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <blockquote>"They rebuilt our patio and now mow for us every week. Same crew, always on time, and the cleanup is spotless. Couldn't ask for more."</blockquote>
+        <div class="who"><b>Sample Name</b><small>Homeowner &middot; Your Town</small></div>
+      </div>
+      <div class="review reveal">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <blockquote>"Got three quotes for a retaining wall. R&amp;R was the only one who walked the whole yard and explained the drainage. Wall's held up perfectly."</blockquote>
+        <div class="who"><b>Sample Name</b><small>Homeowner &middot; Your Town</small></div>
+      </div>
+      <div class="review reveal">
+        <div class="stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <blockquote>"Reliable is the word. They actually answer the phone, show up when they say, and the lawn has never looked better. Highly recommend."</blockquote>
+        <div class="who"><b>Sample Name</b><small>Business owner &middot; Your Town</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     QUOTE FORM
+     -------------------------------------------------------------------
+     HOW THE FORM WORKS RIGHT NOW:
+       As shipped, clicking "Send my request" opens the visitor's email
+       app with all their answers filled in, addressed to you. They just
+       hit send. This works everywhere with no setup.
+       >> EDIT the email address: search this file for  youremail  and
+          replace BOTH places with your real address.
+
+     WANT IT TO SUBMIT WITHOUT OPENING AN EMAIL APP? (recommended)
+       1. Go to formspree.io (free tier) and make a form. You'll get a URL
+          like  https://formspree.io/f/abcwxyz
+       2. In the <form> tag below, change:
+            onsubmit="buildEmail(event)"   ->  (delete this attribute)
+          and add:
+            action="https://formspree.io/f/abcwxyz" method="POST"
+       3. That's it — submissions will email you directly.
+     ===================================================================== -->
+<section class="quote" id="quote">
+  <svg class="topo" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g fill="none" stroke="#9FD3A9" stroke-width="1.1">
+      <path d="M-50 150 C 200 90, 400 210, 650 150 S 1100 70, 1300 170"/>
+      <path d="M-50 260 C 220 210, 420 320, 660 260 S 1120 190, 1300 280"/>
+      <path d="M-50 370 C 240 320, 450 430, 690 370 S 1140 300, 1300 390"/>
+      <path d="M-50 480 C 260 430, 480 540, 720 480 S 1160 420, 1300 500"/>
+    </g>
+  </svg>
+
+  <div class="wrap quote-inner">
+    <div class="reveal">
+      <span class="label">Free estimate</span>
+      <h2>Tell us about the job.</h2>
+      <p class="lead">Send a few details and we'll get back to you, usually within one business day, with next steps or a quote.</p>
+
+      <!-- EDIT: your real contact details. -->
+      <div class="contact-line"><span>CALL/TEXT</span><b>(555) 123-4567</b></div>
+      <div class="contact-line"><span>EMAIL&nbsp;&nbsp;&nbsp;</span><b>youremail@example.com</b></div>
+      <div class="contact-line"><span>HOURS&nbsp;&nbsp;&nbsp;</span><b>Mon–Sat, 7am–6pm</b></div>
+      <div class="contact-line"><span>AREA&nbsp;&nbsp;&nbsp;&nbsp;</span><b>Your county &amp; surrounding towns</b></div>
+    </div>
+
+    <form class="q" onsubmit="buildEmail(event)">
+      <div class="row2">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" required placeholder="Jane Smith" />
+        </div>
+        <div class="field">
+          <label for="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" required placeholder="(555) 555-5555" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="you@example.com" />
+      </div>
+      <div class="field">
+        <label for="service">What do you need?</label>
+        <select id="service" name="service">
+          <option>Lawn mowing / maintenance</option>
+          <option>Landscaping / cleanup / mulch</option>
+          <option>Sod / seeding / grading</option>
+          <option>Patio / walkway / pavers</option>
+          <option>Retaining wall</option>
+          <option>Deck / fence</option>
+          <option>Concrete / foundation</option>
+          <option>Other / not sure</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="message">Project details</label>
+        <textarea id="message" name="message" placeholder="Address or area, rough size, timeline, anything helpful..."></textarea>
+      </div>
+      <button class="btn btn-primary" type="submit">Send my request</button>
+      <p class="fineprint">Sending opens your email app with the details filled in — just press send. Prefer to talk? Call (555)&nbsp;123-4567.</p>
+    </form>
+  </div>
+</section>
+
+<!-- =====================================================================
+     FOOTER
+     ===================================================================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top" style="margin-bottom:16px;">
+          <span class="mono-mark">R&amp;R</span>
+          <span>
+            <b>R&amp;R Lawn Care</b>
+            <small>&amp; Construction</small>
+          </span>
+        </a>
+        <p style="max-width:32ch;font-size:15px;color:#AFBCAD;">Lawn care, landscaping, hardscapes, and construction for residential and commercial properties. Free estimates. Licensed &amp; insured.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Mowing &amp; maintenance</a></li>
+          <li><a href="#services">Landscaping</a></li>
+          <li><a href="#services">Patios &amp; walls</a></li>
+          <li><a href="#services">Decks &amp; fences</a></li>
+          <li><a href="#services">Concrete</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul class="foot-mono">
+          <li><a href="tel:5551234567">(555) 123-4567</a></li>
+          <li><a href="mailto:youremail@example.com">youremail@example.com</a></li>
+          <li>Mon–Sat, 7am–6pm</li>
+          <li>Your county &amp; nearby</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; <span id="yr"></span> R&amp;R Lawn Care and Construction</span>
+      <span>Licensed &amp; insured &middot; Free estimates</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* Mobile menu toggle */
+  (function () {
+    var t = document.getElementById('menuToggle');
+    var links = document.getElementById('navLinks');
+    if (t && links) {
+      t.addEventListener('click', function () {
+        var open = links.classList.toggle('open');
+        t.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      links.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') { links.classList.remove('open'); t.setAttribute('aria-expanded', 'false'); }
+      });
+    }
+  })();
+
+  /* Current year in footer */
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  /* Scroll reveal */
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var els = document.querySelectorAll('.reveal');
+    if (reduce || !('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+
+  /* Quote form -> opens email app with details filled in.
+     (Delete/replace this if you switch to Formspree — see form comment.) */
+  function buildEmail(e) {
+    e.preventDefault();
+    var f = e.target;
+    var to = 'youremail@example.com'; /* EDIT: your real email */
+    var name = (f.name.value || '').trim();
+    var phone = (f.phone.value || '').trim();
+    var email = (f.email.value || '').trim();
+    var service = f.service.value;
+    var message = (f.message.value || '').trim();
+
+    var subject = 'Quote request: ' + service + (name ? ' — ' + name : '');
+    var body =
+      'Name: ' + name + '\n' +
+      'Phone: ' + phone + '\n' +
+      'Email: ' + email + '\n' +
+      'Service needed: ' + service + '\n\n' +
+      'Details:\n' + message + '\n';
+
+    window.location.href = 'mailto:' + to +
+      '?subject=' + encodeURIComponent(subject) +
+      '&body=' + encodeURIComponent(body);
+  }
+</script>
+</body>
+</html>
